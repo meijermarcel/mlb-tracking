@@ -43,24 +43,3 @@
         <StatView {stat}></StatView>
     {/each}
 </div>
-
-<!-- <div class="stat-picker">
-    { #each availableStats as stat }
-        <button class:selected="{selectedStat === stat.value}" on:click={() => sortMembersByStat(stat.value)}>{ stat.label }</button>
-    { /each }
-</div> -->
-
-
-<!-- <table>
-    <thead>
-    </thead>
-    <tbody>
-        { #each data.members as member, i }
-            <tr>
-                <td>{ i + 1 }</td>
-                <td>{ member.name }</td>
-                <td class="text-center">{ member.batting[selectedStat] }</td>
-            </tr>
-        { /each }
-    </tbody>
-</table> -->

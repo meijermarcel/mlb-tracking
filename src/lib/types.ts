@@ -153,6 +153,8 @@ export class MLBGame {
 	away_spread = 0;
 	total = 0;
 	date_time = new Date();
+	selected_key?: string;
+	selected_member?: string;
 }
 
 export class SelectValue {

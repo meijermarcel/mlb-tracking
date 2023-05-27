@@ -1,10 +1,23 @@
 <script lang="ts">
 	import type { PageData } from "./$types";
+    import type { MLBGame } from "$lib/types";
     import dayjs from 'dayjs';
+	import SubmitPickModal from "$lib/components/submit-pick-modal/SubmitPickModal.svelte";
 
     export let data: PageData;
 
     $: ({games} = data);
+    // games for today only
+    $: gamesFiltered = games.filter((game: MLBGame) => {
+        const today = new Date();
+        const gameDate = new Date(game.date_time);
+        return today.getDate() === gameDate.getDate();
+    });
+
+    let selectedGame: MLBGame;
+    let viewPickModal = false;
+    const possibleMembers = ['Marcel', 'Nate', 'Bob', 'Tom', 'Carter'];
+    // const possibleMembers = [];
 
     function convertDate(date: Date) {
         // use dayjs
@@ -16,6 +29,12 @@
             return `+${spread}`;
         }
         return spread;
+    }
+
+    function selectGame(game: MLBGame, key: string) {
+        selectedGame = game;
+        selectedGame.selected_key = key;
+        viewPickModal = true;
     }
 </script>
 
@@ -66,6 +85,8 @@
         border-radius: 7px;
         margin: 2px;
         padding: 5px 0;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
     }
 
     .divider {
@@ -76,23 +97,28 @@
 
 </style>
 
+{#if viewPickModal}
+    <SubmitPickModal game={selectedGame} members={possibleMembers} bind:expanded={viewPickModal}></SubmitPickModal>
+{/if}
+
 <h3>Picks</h3>
 
 <div class="games">
     <div class="divider"></div>
-    {#each games as game}
+    {#each gamesFiltered as game}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="game">
             <div class="game-time">{convertDate(game.date_time)}</div>
             <div class="game-lines">
                 <div>
                     <div class="team-name">{game.away_team}</div>
-                    <div class="line">{addPlusSign(game.away_spread)}</div>
-                    <div class="line">O{game.total}</div>
+                    <button class="line" on:click={() => selectGame(game, 'away_spread')}>{addPlusSign(game.away_spread)}</button>
+                    <button class="line" on:click={() => selectGame(game, 'over')}>O{game.total}</button>
                 </div>
                 <div>
                     <div class="team-name">{game.home_team}</div>
-                    <div class="line">{addPlusSign(game.home_spread)}</div>
-                    <div class="line">U{game.total}</div>
+                    <button class="line" on:click={() => selectGame(game, 'home_spread')}>{addPlusSign(game.home_spread)}</button>
+                    <button class="line" on:click={() => selectGame(game, 'under')}>U{game.total}</button>
                 </div>
             </div>
         </div>
