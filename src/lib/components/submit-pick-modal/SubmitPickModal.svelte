@@ -28,7 +28,6 @@
 
         let contents = {
             pick: '',
-            label: '',
             matchup: '',
             game_time: '',
         }
@@ -38,19 +37,34 @@
 
         if (game.selected_key === 'over') {
             contents.pick = 'Over ' + game.total;
-            contents.label = 'Total Runs';
         } else if (game.selected_key === 'under') {
             contents.pick = 'Under ' + game.total;
-            contents.label = 'Total Runs';
         } else if (game.selected_key === 'away_spread') {
             contents.pick = game.away_team + ' ' + formatSpread(game.away_spread);
-            contents.label = 'Run Line';
         } else if (game.selected_key === 'home_spread') {
             contents.pick = game.home_team + ' ' + formatSpread(game.home_spread);
-            contents.label = 'Run Line';
         }
 
         return contents;
+    }
+
+    function submitPick() {
+        const pick = {
+            selected_key: game.selected_key,
+            selected_member: game.selected_member,
+        }
+
+        fetch('/api/games', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(pick),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        });
     }
 </script>
 
@@ -162,6 +176,7 @@
         padding: 0.5rem;
         border-radius: 5px;
         border: 1px solid var(--primary-color);
+        --webkit-appearance: none;
     }
 </style>
 
@@ -177,7 +192,6 @@
             <div class="pick-container">
                 <div class="line">
                     <div class="pick">{pickContents.pick}</div>
-                    <!-- <div class="label">{pickContents.label}</div> -->
                 </div>
                 <div class="game-info">
                     <div>{pickContents.matchup}</div>
@@ -194,7 +208,7 @@
                     </select>
                 </div>
                 <div class="text-center">
-                    <button>Submit</button>
+                    <button on:click={() => submitPick()}>Submit</button>
                 </div>
             {:else}
                 <div class="text-center">
