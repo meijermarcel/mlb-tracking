@@ -1,6 +1,10 @@
 <script>
     import { SyncLoader } from 'svelte-loading-spinners';
     import { page, navigating } from '$app/stores';
+    import { dev } from '$app/environment';
+    import { inject } from '@vercel/analytics';
+    
+    inject({ mode: dev ? 'development' : 'production' });
 </script>
 
 <style>
