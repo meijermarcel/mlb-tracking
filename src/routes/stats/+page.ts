@@ -55,7 +55,7 @@ export const load = async () => {
 			const ops = parseFloat($(element).find('td').eq(18).text());
 
 			// remove leading and trailing whitespace from team name
-			const teamSanitized = team.trim();
+			const teamSanitized = team.trim().split('\n')[0];
 
 			// find member that has this team
 			const member = members.find((member) => member.teams.includes(teamSanitized));
@@ -106,7 +106,7 @@ export const load = async () => {
 				const strikeouts = parseInt($(element).find('td').eq(17).text());
 
 				// remove leading and trailing whitespace from team name
-				const teamSanitized = team.trim();
+				const teamSanitized = team.trim().split('\n')[0];
 				// find member that has this team
 				const member = members.find((member) => member.teams.includes(teamSanitized));
 

@@ -33,7 +33,7 @@ export async function GET() {
 		const team = $(element).find('td').eq(1).text();
 		const record = $(element).find('td').eq(2).text();
 		// remove leading and trailing whitespace from team name
-		const teamSanitized = team.trim();
+		const teamSanitized = team.trim().split('\n')[0];
 		// remove whitepsace from record
 		const recordSanitized = record.replace(/\s/g, '');
 		const split = recordSanitized.split('-');
