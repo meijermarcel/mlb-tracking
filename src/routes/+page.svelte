@@ -101,7 +101,7 @@
                     <h3>
                         <span class="position">{ i + 1 }</span>
                         { member.name }
-                        <span>{ i === 0 ? '👑' : i === 4 ? '🤡' : '' }</span>
+                        <!-- <span>{ i === 0 ? '👑' : i === 4 ? '🤡' : '' }</span> -->
                     </h3>
                     <div class="games-behind">{member.gamesBehind } GB</div>
                 </div>
