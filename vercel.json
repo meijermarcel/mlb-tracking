@@ -1,10 +1,6 @@
 {
   "crons": [
     {
-      "path": "/api/store-game-odds",
-      "schedule": "00 10 * * *"
-    },
-    {
       "path": "/api/store-member-standings",
       "schedule": "00 9 * * *"
     }
