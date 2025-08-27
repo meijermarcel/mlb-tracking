@@ -16,6 +16,7 @@ const resetStats = () => {
 
 function findAndAddStat(stats: StatField[], memberName: string, statName: string, value: number) {
 	const statField = stats.find((stat) => stat.name === statName);
+	// dummy comment
 	if (statField) {
 		const memberStat = statField.members.find((member) => member.name === memberName);
 		if (memberStat) {
