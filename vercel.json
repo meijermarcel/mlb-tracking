@@ -1,5 +1,9 @@
 {
-  "runtime": "nodejs22.x",
+  "functions": {
+    "**": {
+      "runtime": "nodejs22.x"
+    }
+  },
   "crons": [
     {
       "path": "/api/store-member-standings",
