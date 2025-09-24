@@ -1,6 +1,6 @@
 import { Game, GameTeam, MemberStanding } from '$lib/types';
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import { members } from '$lib/global-var';
 
 let standings: MemberStanding[] = [];
@@ -68,7 +68,14 @@ export const load = async () => {
 			const teamImg = $(element).find('td').eq(1).find('img').attr('src');
 
 			// remove leading and trailing whitespace from team name
-			const teamSanitized = team.trim().split('\n')[0];
+			let teamSanitized = team.trim().split('\n')[0];
+			// handle case where team name ends with Y, X, W, etc.
+			const specialChars = ['Y', 'X', 'W', 'Z'];
+			if (specialChars.some((char) => teamSanitized.endsWith(` ${char}`))) {
+				teamSanitized = teamSanitized.slice(0, -1);
+			}
+			teamSanitized = teamSanitized.trim();
+
 			// remove whitepsace from record
 			const recordSanitized = record.replace(/\s/g, '');
 
