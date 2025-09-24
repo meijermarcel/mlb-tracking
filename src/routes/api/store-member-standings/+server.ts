@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import { members } from '$lib/global-var';
 import { MemberStanding } from '$lib/types';
 import { membersAndRecords } from '$db/membersAndRecords';

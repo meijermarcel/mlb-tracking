@@ -1,6 +1,6 @@
 import { StatField, Stats } from '$lib/types';
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import { members } from '$lib/global-var';
 
 let stats: Stats = new Stats();
