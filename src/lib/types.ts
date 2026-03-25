@@ -14,6 +14,7 @@ export class MemberStanding {
 	gamesToday: Game[] = [];
 	dailyWins = 0;
 	dailyLosses = 0;
+	streak = ''; // e.g. "W3", "L2" — derived from today's results
 
 	constructor(name: string) {
 		this.name = name;
@@ -27,6 +28,9 @@ export class Team {
 	runsScored = 0;
 	diff = 0;
 	img = '';
+	winPct = 0;  // calculated: wins / (wins + losses)
+	l10 = '';    // e.g. "7-3" — scraped from Fox Sports
+	streak = ''; // e.g. "W3" — scraped from Fox Sports
 }
 
 export class Game {
@@ -35,6 +39,7 @@ export class Game {
 	status = '';
 	showScore = true;
 	outcome = '';
+	isHeadToHead = false; // true when both teams belong to different league members
 }
 
 export class GameTeam {
