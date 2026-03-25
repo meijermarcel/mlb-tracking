@@ -17,8 +17,7 @@ const resetStandings = () => {
 		new MemberStanding('Nate'),
 		new MemberStanding('Bob'),
 		new MemberStanding('Tom'),
-		new MemberStanding('Carter'),
-		new MemberStanding('Matt')
+		new MemberStanding('Carter')
 	];
 };
 

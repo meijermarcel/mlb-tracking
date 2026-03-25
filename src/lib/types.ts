@@ -83,8 +83,7 @@ export class StatField {
 		new MemberStat('Nate'),
 		new MemberStat('Bob'),
 		new MemberStat('Tom'),
-		new MemberStat('Carter'),
-		new MemberStat('Matt')
+		new MemberStat('Carter')
 	];
 
 	constructor(name: string) {

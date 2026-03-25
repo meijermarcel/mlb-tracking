@@ -1,26 +1,22 @@
 export const members = [
 	{
 		name: 'Marcel',
-		teams: ['Dodgers', 'Mariners', 'Tigers', 'Giants', 'Cardinals']
+		teams: ['Dodgers', 'Tigers', 'Brewers', 'Diamondbacks', 'Guardians', 'Rockies']
 	},
 	{
 		name: 'Nate',
-		teams: ['Diamondbacks', 'Cubs', 'Mets', 'Reds', 'Nationals']
+		teams: ['Blue Jays', 'Cubs', 'Rangers', 'Royals', 'Marlins', 'White Sox']
 	},
 	{
 		name: 'Bob',
-		teams: ['Braves','Astros', 'Twins', 'Royals', 'Marlins']
+		teams: ['Mets', 'Phillies', 'Padres', 'Astros', 'Athletics', 'Twins']
 	},
 	{
 		name: 'Tom',
-		teams: ['Yankees', 'Padres', 'Guardians', 'Athletics', 'Angels']
+		teams: ['Mariners', 'Red Sox', 'Giants', 'Reds', 'Rays', 'Nationals']
 	},
 	{
 		name: 'Carter',
-		teams: ['Orioles', 'Rangers', 'Rays', 'Pirates', 'Rockies']
-	},
-	{
-		name: 'Matt',
-		teams: ['Phillies', 'Red Sox', 'Brewers', 'Blue Jays', 'White Sox']
+		teams: ['Orioles', 'Yankees', 'Pirates', 'Braves', 'Cardinals', 'Angels']
 	}
 ];
