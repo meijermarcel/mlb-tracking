@@ -5,9 +5,9 @@ import { members } from '$lib/global-var';
 
 let stats: Stats = new Stats();
 const battingURL =
-	'https://www.foxsports.com/mlb/team-stats?category=batting&season=2025&seasonType=reg';
+	'https://www.foxsports.com/mlb/team-stats?category=batting&season=2026&seasonType=reg';
 const pitchingURL =
-	'https://www.foxsports.com/mlb/team-stats?category=pitching&season=2025&seasonType=reg';
+	'https://www.foxsports.com/mlb/team-stats?category=pitching&season=2026&seasonType=reg';
 
 // function to reset standings
 const resetStats = () => {
