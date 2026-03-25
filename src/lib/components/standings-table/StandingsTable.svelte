@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { MemberStanding } from "$lib/types";
-	import { getTeamColor } from "$lib/team-colors";
 
 	export let member: MemberStanding;
 
@@ -41,10 +40,10 @@
 		font-weight: 600;
 	}
 
-	.team-dot {
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
+	.team-logo {
+		height: 20px;
+		width: 20px;
+		object-fit: contain;
 		flex-shrink: 0;
 	}
 
@@ -82,7 +81,7 @@
 				<tr>
 					<td class="team-cell">
 						<div class="team-label">
-							<span class="team-dot" style="background-color: {getTeamColor(team.name)}"></span>
+							<img class="team-logo" src="{team.img}" alt="" />
 							{team.name}
 						</div>
 					</td>

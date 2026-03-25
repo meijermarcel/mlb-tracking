@@ -17,6 +17,18 @@
 		justify-content: space-between;
 	}
 
+	.team-info {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.team-logo {
+		height: 14px;
+		width: 14px;
+		object-fit: contain;
+	}
+
 	.team-name {
 		font-size: 12px;
 		font-weight: 600;
@@ -34,9 +46,12 @@
 
 {#if team}
 	<div class="team-row">
-		<span class="team-name" class:active={isMemberTeam} style="color: {teamColor}">
-			{team.name}
-		</span>
+		<div class="team-info">
+			<img class="team-logo" src="{team.logoSrc}" alt="" />
+			<span class="team-name" class:active={isMemberTeam} style="color: {teamColor}">
+				{team.name}
+			</span>
+		</div>
 		{#if showScore}
 			<span class="team-score">{team.score}</span>
 		{/if}
