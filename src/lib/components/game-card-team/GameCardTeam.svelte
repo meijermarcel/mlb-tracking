@@ -1,56 +1,44 @@
 <script lang="ts">
-    import type { GameTeam } from "$lib/types";
+	import type { GameTeam } from "$lib/types";
+	import { getTeamColor } from "$lib/team-colors";
 
-    export let team: GameTeam;
-    export let showScore: boolean;
-    export let memberName: string;
+	export let team: GameTeam;
+	export let showScore: boolean;
+	export let memberName: string;
+
+	$: isMemberTeam = memberName === team.memberName;
+	$: teamColor = getTeamColor(team.name);
 </script>
 
 <style>
-    .team-row {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
+	.team-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 
-    .team-info {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+	.team-name {
+		font-size: 12px;
+		font-weight: 600;
+	}
 
-    .team-logo {
-        margin-right: 5px;
-    }
+	.team-name.active {
+		font-weight: 700;
+	}
 
-    .team-name {
-        font-weight: 600;
-    }
-
-    .team-name.active {
-        color: var(--primary-color);
-    }
-
-    .team-score {
-        font-weight: bold;
-    }
+	.team-score {
+		font-weight: 700;
+		font-size: 12px;
+	}
 </style>
 
-{ #if team }
-    <div class="team-row">
-        <div class="team-info">
-            <div class="team-logo">
-                <img height="10px" src="{team.logoSrc}" alt="" />
-            </div>
-            <div class="team-name" class:active={memberName === team.memberName}>
-                { team.name }
-            </div>
-        </div>
-        { #if showScore }
-            <div class="team-score">
-                { team.score }
-            </div>
-        { /if }
-    </div>
-{ /if }
+{#if team}
+	<div class="team-row">
+		<span class="team-name" class:active={isMemberTeam} style="color: {teamColor}">
+			{team.name}
+		</span>
+		{#if showScore}
+			<span class="team-score">{team.score}</span>
+		{/if}
+	</div>
+{/if}
