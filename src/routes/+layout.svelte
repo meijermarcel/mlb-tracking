@@ -30,14 +30,14 @@
 </footer>
 
 <style>
+	:global(body) {
+		background-color: #fafafa;
+	}
+
 	.container {
 		padding: 1rem 0.5rem;
 		max-width: 400px;
 		margin: 4rem auto;
-	}
-
-	.outer {
-		margin: 0 auto;
 	}
 
 	nav {
@@ -45,18 +45,18 @@
 		gap: 0.5rem;
 		align-items: center;
 		justify-content: space-between;
-		/* margin: 1rem; */
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
-		background-color: whitesmoke;
-		border: 1px solid var(--primary-color);
+		background-color: white;
+		border: 1px solid rgba(0, 0, 0, 0.06);
 		padding: 0.5rem;
 		border-radius: 12px;
-		box-shadow: #ff400046 0px 3px 8px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 		max-width: min(90vw, 365px);
 		margin: 1rem auto;
+		z-index: 100;
 	}
 
 	a {
