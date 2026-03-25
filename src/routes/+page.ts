@@ -62,6 +62,8 @@ export const load = async () => {
 			const record = $(element).find('td').eq(2).text();
 			const runsScored = parseInt($(element).find('td').eq(7).text());
 			const diff = parseInt($(element).find('td').eq(9).text());
+			const l10 = $(element).find('td').eq(10).text().trim();
+			const streak = $(element).find('td').eq(11).text().trim();
 
 			// get img src from team
 			const teamImg = $(element).find('td').eq(1).find('img').attr('src');
@@ -102,7 +104,10 @@ export const load = async () => {
 						wins,
 						losses,
 						runsScored: runsScored,
-						diff: diff
+						diff: diff,
+						winPct: wins + losses > 0 ? wins / (wins + losses) : 0,
+						l10: l10 || '0-0',
+						streak: streak || '-'
 					});
 				}
 			}
@@ -198,10 +203,14 @@ export const load = async () => {
 					}
 				}
 
-				// find away team member in standings
+				// find away and home team members in standings
 				const awayTeamMember = standings.find((member) =>
 					member.teams.find((team) => team.name === teamOneSanitized)
 				);
+				const homeTeamMember = standings.find((member) =>
+					member.teams.find((team) => team.name === teamTwoSanitized)
+				);
+
 				if (awayTeamMember) {
 					game.awayTeam.memberName = awayTeamMember.name;
 					// create new game so we don't overwrite the original
@@ -211,19 +220,18 @@ export const load = async () => {
 					awayGame.status = game.status;
 					awayGame.outcome = awayOutcome;
 					awayGame.showScore = game.showScore;
+					awayGame.isHeadToHead = !!(homeTeamMember && homeTeamMember.name !== awayTeamMember.name);
 					// find away team in member's teams
 					awayTeamMember.gamesToday.push(awayGame);
 				}
 
-				// find home team in standings
-				const homeTeamMember = standings.find((member) =>
-					member.teams.find((team) => team.name === teamTwoSanitized)
-				);
+				// handle home team
 				if (homeTeamMember) {
 					game.homeTeam.memberName = homeTeamMember.name;
 					// if awayTeam member name is different than homeTeam member name
 					if (awayTeamMember && awayTeamMember.name !== homeTeamMember.name) {
 						game.outcome = homeOutcome;
+						game.isHeadToHead = !!(awayTeamMember && awayTeamMember.name !== homeTeamMember.name);
 						// find home team in member's teams
 						homeTeamMember.gamesToday.push(JSON.parse(JSON.stringify(game)));
 					} else if (awayTeamMember && game.outcome === 'loss') {
@@ -235,6 +243,16 @@ export const load = async () => {
 						});
 					}
 				}
+			});
+
+			// Calculate member daily streak (only shown if >= 2)
+			standings.forEach((member) => {
+				if (member.dailyWins >= 2 && member.dailyLosses === 0) {
+					member.streak = `W${member.dailyWins}`;
+				} else if (member.dailyLosses >= 2 && member.dailyWins === 0) {
+					member.streak = `L${member.dailyLosses}`;
+				}
+				// Mixed results, < 2, or no finals → streak stays empty string
 			});
 
 			return { members: standings };
